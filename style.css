@@ -1,0 +1,20 @@
+body {
+    background-image: url("images/white-cloud-blue-sky.jpg");
+}
+
+.custom-transparent-bg  {
+    filter: opacity(0.8);
+}
+
+.icon{
+    max-width: 80px;
+    max-height: 80px;
+}
+
+.error {
+    display: none;
+}
+
+button {
+    filter: opacity(0.8);
+}
