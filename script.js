@@ -2,10 +2,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const apiKey = "e20972e0c320968ab02cc123bf6254ea";
   const apiUrl =
     "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+  const defaultCity = "Iasi";
 
   //constante eveniment click/enter
   const searchBox = document.querySelector(".search input");
   const searchButton = document.querySelector(".search button");
+
+  fetchWeather(defaultCity);
 
   async function fetchWeather(city) {
     const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
@@ -28,6 +31,17 @@ document.addEventListener("DOMContentLoaded", () => {
       Math.round(data.main.temp_min) + "°C";
     document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
     document.querySelector(".wind").innerHTML = data.wind.speed + "km/h";
+    document.querySelector(".description").innerHTML = capitalizeWords(
+      data.weather[0].description
+    );
+    document.querySelector(".feels-like").innerHTML = `Feels like: ${Math.round(
+      data.main.feels_like
+    )}°C`;
+    document.querySelector(".pressure").innerHTML =
+      data.main.pressure / 1000 + " hPA";
+
+    document.querySelector(".visibility").innerHTML =
+      data.visibility / 1000 + " km";
 
     //update images
     const weatherIcon = document.querySelector(".weather-icon");
@@ -52,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
         break;
     }
 
-    errorElement.style.display = "none"; //stergem eroare
+    document.querySelector(".error").style.display = "none"; //stergem eroare
   }
 
   //event click
@@ -68,4 +82,12 @@ document.addEventListener("DOMContentLoaded", () => {
       fetchWeather(searchBox.value);
     }
   });
+
+  function capitalizeWords(str) {
+    var words = str.split(" ");
+    for (var i = 0; i < words.length; i++) {
+      words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+    }
+    return words.join(" ");
+  }
 });

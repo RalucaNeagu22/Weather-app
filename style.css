@@ -6,10 +6,6 @@ body {
     filter: opacity(0.8);
 }
 
-.icon{
-    max-width: 80px;
-    max-height: 80px;
-}
 
 .error {
     display: none;
@@ -18,3 +14,4 @@ body {
 button {
     filter: opacity(0.8);
 }
+
